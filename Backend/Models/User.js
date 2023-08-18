@@ -6,9 +6,12 @@ const userSchema = new Schema({
         type: String,
         required: [true,'El Nombre es obligatorio']
     },
-    username:{
+    lastname:{
         type: String,
-        required: [true, 'El username es obligatorio']
+        required: [true, 'El Apellido es obligatorio']
+    },
+    username:{
+        type: String
     },
     email:{
         type: String,
@@ -21,20 +24,38 @@ const userSchema = new Schema({
     phone:{
         type:String,
         required:[true,'El Teléfono es obligatorio']
-    }
-    ,
-    isAdmin: { 
-        type: Boolean, default: false 
     },
     rol: { 
-        type: String, 
-        required:true 
+        type: String
     },
     createdTime: { 
-        type: Date, default: new Date() 
+        type: Date, default: Date.now()
     },
     google:{
         type: Boolean, default: false
+    },orders:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Order'
+        }
+    ],
+    Bookings:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Booking'
+        }
+    ],
+    Interactions:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Interaction'
+        }
+    ], 
+    isActive:{
+        type: Boolean, default: true
+    },
+    date:{
+        type:String
     }
 });
 
