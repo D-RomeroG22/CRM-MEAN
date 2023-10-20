@@ -2,14 +2,14 @@ import {response} from 'express';
 
 
 
-const resWithoutData = (res=response,status = 200,msg)=>{
+const resWithoutData = (status = 200,msg,res=response)=>{
     return res.status(status).json({
         msg
     });
 }
 
 
-const errorHandler = (res=response,status=400,error)=>{
+const errorHandler = (status=400,error,res=response)=>{
     let errorInfo;
     (error.message) ? errorInfo = error.message : errorInfo = error;
     
@@ -19,7 +19,7 @@ const errorHandler = (res=response,status=400,error)=>{
 }
 
 
-const resWithData = (res=response,status=200,msg,data)=>{
+const resWithData = (status=200,msg,data,res=response)=>{
 
     return res.status(status).json({
         msg,

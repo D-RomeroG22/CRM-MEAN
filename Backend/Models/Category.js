@@ -1,10 +1,11 @@
-import mongoose, { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const categorySchema = new Schema({
 
     name:{
         type: String,
-        required: [true,'El nombre de la categoría es obligatorio']
+        required: [true,'El nombre de la categoría es obligatorio'],
+        uppercase:true
     },
     avaible:{
         type: Boolean,
@@ -21,4 +22,4 @@ const categorySchema = new Schema({
     }
 });
 
-export default Model('Categorie',categorySchema);
+export default model('Categorie',categorySchema);

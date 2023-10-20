@@ -11,7 +11,8 @@ const userSchema = new Schema({
         required: [true, 'El Apellido es obligatorio']
     },
     username:{
-        type: String
+        type: String,
+        required: [true,'El Nombre de usuario es obligatorio']
     },
     email:{
         type: String,
@@ -19,11 +20,13 @@ const userSchema = new Schema({
     },
     password:{
         type: String,
-        required: [true,'La contraseña es obligatoria']
+        required: [true,'La contraseña es obligatoria'],
+        minLength: [8,'Contraseña minimo de 8 carácteres']
     },
     phone:{
         type:String,
-        required:[true,'El Teléfono es obligatorio']
+        required:[true,'El Teléfono es obligatorio'],
+        match: [/^[+][0-9]{1,6}([-]?[0-9]+){0,9}[ ]?[0-9]{7,15}$/,'El teléfono SOLO debe contener un prefijo correspondiente al país y números']
     },
     rol: { 
         type: String
@@ -39,13 +42,13 @@ const userSchema = new Schema({
             ref: 'Order'
         }
     ],
-    Bookings:[
+    bookings:[
         {
             type: Schema.Types.ObjectId,
             ref: 'Booking'
         }
     ],
-    Interactions:[
+    interactions:[
         {
             type: Schema.Types.ObjectId,
             ref: 'Interaction'
@@ -53,9 +56,6 @@ const userSchema = new Schema({
     ], 
     isActive:{
         type: Boolean, default: true
-    },
-    date:{
-        type:String
     }
 });
 

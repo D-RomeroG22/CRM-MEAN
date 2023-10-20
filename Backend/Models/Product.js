@@ -1,18 +1,23 @@
-import mongoose, {Schema,model} from 'mongoose';
+import {Schema,model} from 'mongoose';
 
 const productSchema = new Schema({
 
     name:{
         type:String ,
-        required: [true,'El nombre del producto es requerido']
+        required: [true,'El nombre del producto es requerido'],
+        uppercase:true
     },
     description:{
-        type:String,
-        required:[true,'La descripción del producto es requerida']
+        type:String
     },
     avaible:{
         type:Boolean,
         default:true
+    },
+    category:{
+        type : Schema.Types.ObjectId, ref:'Categorie',
+        required: [true,'El ID de la categoría es obligatoría'],
+
     },
     userCreator:{
         type: Schema.Types.ObjectId,
@@ -26,4 +31,4 @@ const productSchema = new Schema({
 
 });
 
-export default model('Product',userSchema);
+export default model('Product',productSchema);

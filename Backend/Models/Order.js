@@ -18,7 +18,8 @@ const orderSchema = new Schema({
             amount:{
                 type: Number,
                 required:[true,'La cantidad del producto es requerida']
-            }
+            },
+            _id: false
         }
     ],
     isActive:{
@@ -28,9 +29,23 @@ const orderSchema = new Schema({
     Date:{
         type: Date,
         default: Date.now()
+    },
+    status:{
+        type : String ,
+        default:'PENDIENTE'
     }
 });
 
 
+orderSchema.methods.toJSON = function (){ 
+    let {__v,productList,isActive,...order} = this.toObject(); //this.toObject() hace referencia a la nueva 
+    //inserción que se esté llevando a cabo en la BDD 
+    console.log('Hola uwu', productList);
+    productList = productList.map((item) => {
+        let {_id,...rest} = item;
+        return rest;
+    });
+    return order; 
+}
 
 export default model('Order',orderSchema);
