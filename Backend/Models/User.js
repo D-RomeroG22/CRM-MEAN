@@ -6,9 +6,13 @@ const userSchema = new Schema({
         type: String,
         required: [true,'El Nombre es obligatorio']
     },
+    lastname:{
+        type: String,
+        required: [true, 'El Apellido es obligatorio']
+    },
     username:{
         type: String,
-        required: [true, 'El username es obligatorio']
+        required: [true,'El Nombre de usuario es obligatorio']
     },
     email:{
         type: String,
@@ -16,25 +20,42 @@ const userSchema = new Schema({
     },
     password:{
         type: String,
-        required: [true,'La contraseña es obligatoria']
+        required: [true,'La contraseña es obligatoria'],
+        minLength: [8,'Contraseña minimo de 8 carácteres']
     },
     phone:{
         type:String,
-        required:[true,'El Teléfono es obligatorio']
-    }
-    ,
-    isAdmin: { 
-        type: Boolean, default: false 
+        required:[true,'El Teléfono es obligatorio'],
+        match: [/^[+][0-9]{1,6}([-]?[0-9]+){0,9}[ ]?[0-9]{7,15}$/,'El teléfono SOLO debe contener un prefijo correspondiente al país y números']
     },
     rol: { 
-        type: String, 
-        required:true 
+        type: String
     },
     createdTime: { 
-        type: Date, default: new Date() 
+        type: Date, default: Date.now()
     },
     google:{
         type: Boolean, default: false
+    },orders:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Order'
+        }
+    ],
+    bookings:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Booking'
+        }
+    ],
+    interactions:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Interaction'
+        }
+    ], 
+    isActive:{
+        type: Boolean, default: true
     }
 });
 
