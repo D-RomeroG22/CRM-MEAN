@@ -32,19 +32,15 @@ const orderSchema = new Schema({
     },
     status:{
         type : String ,
-        default:'PENDIENTE'
+        default:'PENDIENTE',
+        uppercase:true
     }
 });
 
 
 orderSchema.methods.toJSON = function (){ 
-    let {__v,productList,isActive,...order} = this.toObject(); //this.toObject() hace referencia a la nueva 
+    let {__v,isActive,...order} = this.toObject(); //this.toObject() hace referencia a la nueva 
     //inserción que se esté llevando a cabo en la BDD 
-    console.log('Hola uwu', productList);
-    productList = productList.map((item) => {
-        let {_id,...rest} = item;
-        return rest;
-    });
     return order; 
 }
 

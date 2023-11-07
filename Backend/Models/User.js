@@ -48,12 +48,6 @@ const userSchema = new Schema({
             ref: 'Booking'
         }
     ],
-    interactions:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Interaction'
-        }
-    ], 
     isActive:{
         type: Boolean, default: true
     }
@@ -61,10 +55,9 @@ const userSchema = new Schema({
 
 
 userSchema.methods.toJSON = function (){ 
-    const {__v,password,_id,...user} = this.toObject(); //this.toObject() hace referencia a la nueva 
+    const {__v,password,...user} = this.toObject(); //this.toObject() hace referencia a la nueva 
     //inserción que se esté llevando a cabo en la BDD 
     //sacamos la contraseña y con el operador 'rest' metemos el resto de cosas en 'usuario' 
-    user.uid = _id;
     return user; //retornamos la variable que no contiene la contraseña
 }
 //export the user model

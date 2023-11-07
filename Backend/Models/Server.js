@@ -14,8 +14,9 @@ import '../Middlewares/passport.js';
 import { db_connect } from '../Config/db.js';
 
 //Routes imports
-import {userRouter,categoryRouter,productRouter,interactionRouter,orderRouter,
+import {userRouter,categoryRouter,productRouter,orderRouter,
 bookingRouter,rolRouter, authRouter} from '../Routes/index.js';
+import { analyticRouter } from '../Routes/Analytics.js';
 
 
 class Server {
@@ -30,7 +31,7 @@ class Server {
           product: "/Product",
           booking: "/Booking",
           order:"/Order",
-          interaction :"/Interaction",
+          analytics :"/Analytics",
           rol:"/Rol",
           auth:"/Auth"
         };  
@@ -68,7 +69,7 @@ class Server {
         this.app.use(this.paths.product,productRouter);
         this.app.use(this.paths.booking,bookingRouter);
         this.app.use(this.paths.order,orderRouter );
-        this.app.use(this.paths.interaction,interactionRouter);
+        this.app.use(this.paths.analytics,analyticRouter);
         this.app.use(this.paths.rol,rolRouter);
         this.app.use(this.paths.auth,authRouter);
     }
